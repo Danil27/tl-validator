@@ -13,10 +13,7 @@
     "url": "tl-validator"
   },
   "lint-staged": {
-    "*.{js}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": "tllint"
   },
   "keywords": [
     "tl",
