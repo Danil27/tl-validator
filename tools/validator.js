@@ -1,6 +1,6 @@
 function lint() {
     console.log('########')
-    console.log(process.stdin)
+    console.log(process.args)
 }
 
 lint() 
