@@ -13,7 +13,7 @@
     "url": "tl-validator"
   },
   "lint-staged": {
-    "*.js": "node ./tools/validator.js --arg1 --arg2"
+    "*.js": "npm run tllint"
   },
   "keywords": [
     "tl",
