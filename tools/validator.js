@@ -3,4 +3,4 @@ function lint() {
     console.log(process.argv)
 }
 
-lint()
+lint() 
