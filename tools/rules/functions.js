@@ -12,7 +12,7 @@ class CheckFunctions {
     stringValidation() {
         for (let i = 1; i < this.rowsCout; i++) {
             if (this.functionsText[i].search(/[a-z]{1,}.*#.*;/) !== 0) {
-                console.error('Error: Syntax error.');
+                console.error('Error[function]: Syntax error.');
                 console.error(this.functionsText[i]);
                 process.exit(1);
             }

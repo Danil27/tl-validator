@@ -13,7 +13,7 @@ module.exports.validate = function (fileName) {
     const { types, functions } = exec(cleanScheme);
 
     new CheckGeneralRules(cleanScheme).run();
-    // new CheckType(types).run();
+    new CheckType(types).run();
     // new CheckFunctions(functions).run();
 }
 
