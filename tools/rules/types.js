@@ -12,13 +12,13 @@ class CheckType {
     stringValidation() {
         for (let i = 1; i < this.rowsCout; i++) {
             //общая проверка строки
-            if (this.typesText[i].search(/[a-z]{1,}\w{1,}#\w{1,}.*;/) !== 0) {
+            if (this.typesText[i].search(/[a-z]{1,}(\w{1,}|.)\w{1,}#\w{1,}.*;/) !== 0) {
                 this.syntaxError(this.typesText[i]);
             }
             const typeParams = this.typesText[i].split(/[a-z]{1,}\w{1,}#\w{1,} /)[1];
 
             //если есть свойства, идем внутрь и проверяим их
-            if (typeParams.search(/= (bytes|string|int|long|double|Bool|true|True|False|#){1,};/) === -1) {
+            if (typeParams.search(/= (Vector<[a-zA-Z][a-zA-Z0-9]{1,}>|bytes|string|int|long|double|Bool|true|True|False|#|[A-Z][A-Za-z0-9]{1,}|[a-z][A-Za-z0-9]{1,}.[A-Z][a-zA-Z0-9]{1,}){1,};/) === -1) {
 
                 const typeProps = typeParams.split(/flags:#|=/)[0].split(' ');
 
@@ -41,10 +41,8 @@ class CheckType {
             if (prop === '') {
                 continue;
             }
-            
             if (prop.search(/[a-z]{1,}((_|[a-z0-9A-Z]){1,}):[a-zA-Z][a-zA-Z0-9]{1,}/)) {
-                console.log(prop)
-                console.log(prop.search(/[a-z]{1,}((_|[a-z0-9A-Z]){1,}):flags.[0-9]{1,}\?[a-zA-Z][a-zA-Z0-9]{1,}/))
+
                 if (prop.search(/[a-z]{1,}((_|[a-z0-9A-Z]){1,}):flags.[0-9]{1,}\?[a-zA-Z][a-zA-Z0-9]{1,}/)) {
                     return true;
                 }
@@ -55,7 +53,7 @@ class CheckType {
     //проверка свойств
     checkProps(typeProps) {
         for (let i = 0; i < typeProps.length - 1; i++) {
-            if (typeProps[i].search(/[a-z]{1,}((_|[a-z0-9A-Z]){1,}):(bytes|string|int|long|double|Bool|true|#)/)) {
+            if (typeProps[i].search(/[a-z]{1,}((_|[a-z0-9A-Z]){0,}):(Vector<[a-zA-Z][a-zA-Z0-9]{1,}>|bytes|string|int|long|double|Bool|true|#|[A-Z][A-Za-z0-9]{1,}|[a-z][A-Za-z0-9]{1,}.[A-Z][a-zA-Z0-9]{1,})/)) {
                 //если есть ошибка
                 return true;
             }

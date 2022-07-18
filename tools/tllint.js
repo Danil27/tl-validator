@@ -6,5 +6,4 @@ const { validate } = require("./validator.js");
         validate(process.argv[i]);
     }
 
-    process.exit(1)
 }()); 

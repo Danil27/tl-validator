@@ -9,12 +9,12 @@ module.exports.validate = function (fileName) {
     const schemaText = fs.readFileSync(fileName, "utf8");
     const textWithoutComments = getTextWithoutComments(schemaText);
     const cleanScheme = getTextWithoutBlankLines(textWithoutComments);
-
     const { types, functions } = exec(cleanScheme);
 
+    console.log('file: ', fileName);
     new CheckGeneralRules(cleanScheme).run();
     new CheckType(types).run();
-    // new CheckFunctions(functions).run();
+    new CheckFunctions(functions).run();
 }
 
 const exec = (schemaText) => {
@@ -28,7 +28,11 @@ const exec = (schemaText) => {
 }
 
 const getTextWithoutComments = (schemaText) => {
-    return schemaText.replace(/\/\*[\s\S]*?\*\/|\/\/.*/, '');
+    let textWithoutComments = schemaText;
+    while (textWithoutComments.search(/\/\*[\s\S]*?\*\/|\/\/.*/) !== -1) {
+        textWithoutComments = textWithoutComments.replace(/\/\*[\s\S]*?\*\/|\/\/.*/, '');
+    }
+    return textWithoutComments;
 }
 
 const getTextWithoutBlankLines = (schemaText) => {
