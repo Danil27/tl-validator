@@ -1,11 +1,12 @@
 {
-  "name": "tl-validator",
+  "name": "tl-lint",
   "version": "1.0.0",
   "description": "tl file validator",
-  "main": "index.js",
+  "main": "tllint.js",
+  "type": "commonjs",
   "scripts": {
     "test": "test",
-    "tllint": "node ./tools/validator.js",
+    "tllint": "node --es-module-specifier-resolution=node ./tools/tllint.js",
     "prepare": "husky install"
   },
   "repository": {
@@ -13,10 +14,11 @@
     "url": "tl-validator"
   },
   "lint-staged": {
-    "*.js": "npm run tllint"
+    "*.tl": "npm run tllint"
   },
   "keywords": [
     "tl",
+    "tllint",
     "validator"
   ],
   "author": "Danila Krygin",
